@@ -1,11 +1,12 @@
-import React from "react";
 import styled from "styled-components";
 
-function RoleDice() {
+function RoleDice({ roleDice, currentDice }) {
+
+
   return (
     <DiceContainer>
-      <div className="dice">
-        <img src="/images/dice/dice_1.jpg" alt="" />
+      <div className="dice" onClick={roleDice}>
+        <img src={`/images/dice/dice_${currentDice}.jpg`} alt="" />
       </div>
       <p>Click on Dice to roll</p>
     </DiceContainer>
@@ -20,9 +21,9 @@ const DiceContainer = styled.div`
   align-items: center;
   flex-direction: column;
 
-.dice {
+  .dice {
     cursor: pointer;
-}
+  }
 
   p {
     font-size: 24px;
