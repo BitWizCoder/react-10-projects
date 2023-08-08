@@ -5,13 +5,15 @@ import { useState } from "react";
 
 import styled from "styled-components";
 import RoleDice from "./RoleDice";
-import { Button } from "../styled/Button";
+import { Button, OutlineButton } from "../styled/Button";
+import Rules from "./Rules";
 
 function GamePlay() {
   const [score, setScore] = useState(0);
   const [selectedNumber, setSelectedNumber] = useState();
   const [currentDice, setCurrentDice] = useState(1);
   const [error, setError] = useState("");
+  const [showRules, setShowRules] = useState(false);
 
   const generateRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
@@ -34,6 +36,10 @@ function GamePlay() {
     setSelectedNumber(undefined);
   };
 
+  const resetScore = () => {
+    setScore(0);
+  };
+
   return (
     <MainContainer>
       <div className="top_section">
@@ -47,9 +53,13 @@ function GamePlay() {
       </div>
       <RoleDice currentDice={currentDice} roleDice={roleDice} />
       <div className="btns">
-      <Button>Reset Score</Button>
-      <Button>Show Rules</Button>
+        <OutlineButton onClick={resetScore}>Reset Score</OutlineButton>
+        <Button onClick={() => setShowRules((prev) => !prev)}>
+          {" "}
+          {showRules ? "Hide" : "Show"} Show Rules
+        </Button>
       </div>
+      {showRules && <Rules />}
     </MainContainer>
   );
 }
@@ -72,6 +82,6 @@ const MainContainer = styled.main`
     justify-content: center;
     align-items: center;
     gap: 10px;
+    margin-top: 20px;
   }
-
 `;
